@@ -39,6 +39,14 @@ public class Voiture implements Serializable {
 	public int getPrixLocation() {
 		return prixLocation;
 	}
+
+	public String getModel() {
+		return model;
+	}
+
+	public int getAnneeProduction() {
+		return anneeProduction;
+	}
 	
 	
 	
