@@ -17,11 +17,19 @@ import javax.swing.*;
 import metier.*;
 
 public class First_Interface extends JFrame {
-	
+	Agence A;
 	JFrame fj = this;
 	JPanel panel= new JPanel();
 	public First_Interface(){
 		super("Agence De Location De Voiture ");
+		try {
+			ObjectInputStream ois=new ObjectInputStream(new FileInputStream("agence.txt"));
+				A=(Agence)ois.readObject();
+				ois.close();
+				 
+			}catch(Exception e1) {
+				
+			}
 		setSize(700,500);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new BorderLayout());
@@ -65,17 +73,7 @@ public class First_Interface extends JFrame {
 				 * } catch (Exception e1) { // TODO Auto-generated catch block
 				 * e1.printStackTrace(); }
 				 */
-				Agence A;	
-				try {
-					ObjectInputStream ois=new ObjectInputStream(new FileInputStream("agence.txt"));
-						A=(Agence)ois.readObject();
-						ois.close();
-						 Affichage_voiture AV =  new Affichage_voiture(A);
-					}catch(Exception e1) {
-						
-					}
-			
-			
+				Affichage_voiture AV =  new Affichage_voiture(A);
 			}
 		});
 		B2.addActionListener(new ActionListener() {
@@ -91,7 +89,14 @@ public class First_Interface extends JFrame {
 				    
 			}
 		});
-		
+		B4.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				Rendre_Voiture r=new Rendre_Voiture(A);
+			}
+		});
 		setVisible(true);
 	}
 	
