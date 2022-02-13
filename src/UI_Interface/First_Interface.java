@@ -137,14 +137,14 @@ public class First_Interface extends JFrame {
 			}
 		});
 		
-          /*  B4.addActionListener(new ActionListener() {
+            B4.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				Rendre_Voiture r=new Rendre_Voiture(A);
+				Rendre_Voiture r=new Rendre_Voiture((Agence)monAgence.deserialisation("agence1.txt"));
 			}
-		});*/
+		});
 		
 		setVisible(true);
 	}
