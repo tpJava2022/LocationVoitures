@@ -1,5 +1,19 @@
 package UI_Interface;
 
-public class Cher_Cri {
+import javax.swing.*;
+
+public class Cher_Cri extends JFrame {
+	
+	public Cher_Cri() {
+		
+		
+		
+		
+		
+		
+	}
+	
+	
+	
 
 }

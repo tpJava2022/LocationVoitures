@@ -2,27 +2,25 @@ package UI_Interface;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Spliterators;
-import java.util.regex.PatternSyntaxException;
+import java.util.List;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-import metier.*;
+import metier.Agence;
+import metier.Client;
+import metier.Clients;
+import metier.Voiture;
 
+public class AfficherClients extends JFrame{
 
-public class Affichage_voiture extends JFrame {
 	JPanel panelAffichage = new JPanel();
 	 private TableModel model;
-	public Affichage_voiture(Agence A) {
+	public AfficherClients(Clients A) {
 		// TODO Auto-generated constructor stub
 		//setSize(600,200);
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -30,31 +28,27 @@ public class Affichage_voiture extends JFrame {
 		/*Iterator<Voiture> it;
 		it= A.voituresLouees();
 		ArrayList<Voiture> Al =new ArrayList<Voiture>();*/
-		ArrayList<Voiture> Al = A.Voiture_agence();
+	   List<Client> Al = A.lesClients();
 		
 		/*while(it.hasNext())
 		{
 			Al.add(it.next());
 		}*/
-		String [][] data = new String[Al.size()][6];
+		String [][] data = new String[Al.size()][5];
 		int n=0;
-		for (Voiture v : Al)
+		for (Client v : Al)
 		{
-		data[n][0]= v.getMarque();
-		data[n][1]= v.getModel();
-		data[n][2]=String.valueOf( v.getPrixLocation());
-		data[n][3] = String.valueOf(v.getAnneeProduction());
-		   if(A.estLoue(v)) {
-		         data[n][4] = "Louée";
-		      }
-		   else data[n][4]= "Disponible";
-		   
+		data[n][0]= v.getCin();
+		data[n][1]= v.getNom();
+		data[n][2]=v.getPrenom();
+		data[n][3] =v.getCivilite();
+		  
 		   
 		   
 		n++;
 		}
 		
-		String[] columnNames = { "Marque", "Model", "Anne Production", "Prix", "Etat", "Action"};
+		String[] columnNames = { "CIN", "Nom", "Prenom", "Civilite","Action"};
 		
 		/*model = new DefaultTableModel(data, columnNames) {
 	         public Class getColumnClass(int column) {
@@ -152,24 +146,6 @@ public class Affichage_voiture extends JFrame {
 			}
 		});
 	      //setVisible(true);
-	      JButton button = new JButton("Ajouter une Voiture +");
-	      panelAffichage.add(button,BorderLayout.SOUTH);
-	      button.addActionListener(new ActionListener() {
-				
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
-					///removeAll();
-					/*remove(panAffichage);
-					remove(labimage);*/
-					Add_voiture Ajouter = new Add_voiture();
-					
-					//panelAffichage=Ajouter.getPanel();
-					//add(panelAffichage, BorderLayout.CENTER);
-					//setVisible(true);
-				}
-			});
-	     
 		
 	}
 	public JPanel getPanelAffichage() {
@@ -178,3 +154,4 @@ public class Affichage_voiture extends JFrame {
 	
 	
 }
+

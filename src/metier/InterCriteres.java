@@ -2,6 +2,7 @@ package metier;
 
 import java.util.ArrayList;
 
+
 public class InterCriteres implements Critere {
 	
 	private ArrayList<Critere> criteres;
@@ -28,5 +29,26 @@ public class InterCriteres implements Critere {
 		}
 		return true;
 	}
+	
+	public ArrayList<CritereMarque> Cmarque(){
+		ArrayList<CritereMarque> Cm = new ArrayList<CritereMarque>();
+		for(Critere c:criteres) {
+			if(c instanceof CritereMarque)
+			       Cm.add((CritereMarque) c);
+		}
+		return Cm;
+		
+	}
+	public ArrayList<CriterePrix> Cprix(){
+		ArrayList<CriterePrix> Cm = new ArrayList<CriterePrix>();
+		for(Critere c:criteres) {
+			if(c instanceof CriterePrix)
+			       Cm.add((CriterePrix) c);
+		}
+		return Cm;
+		
+	}
+	
+	
 
 }

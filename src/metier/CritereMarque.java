@@ -10,5 +10,9 @@ public class CritereMarque implements Critere{
 	public CritereMarque(String marque) {
 		this.marque = marque;
 	}
+	public String getMarque() {
+		return marque;
+	}
+	
 
 }

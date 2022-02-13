@@ -20,6 +20,11 @@ public class Agence implements Serializable{
 		// TODO Auto-generated constructor stub
 		voitures=new ArrayList<Voiture>();
 	}
+	public ArrayList<Voiture> Voiture_agence()
+	{
+		return voitures;
+	}
+	
 	
 	public void louerVoiture(Client c,Voiture v) {
 		try {

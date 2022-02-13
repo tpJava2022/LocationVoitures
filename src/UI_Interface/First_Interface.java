@@ -2,6 +2,7 @@ package UI_Interface;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileInputStream;
@@ -13,15 +14,23 @@ import java.io.ObjectOutputStream;
 
 import javax.swing.*;
 
-
+import Handler.MyAgency;
 import metier.*;
 
 public class First_Interface extends JFrame {
 	
 	JFrame fj = this;
 	JPanel panel= new JPanel();
+	JPanel pancentre =new JPanel();
+	JPanel panAffichage = new JPanel();
+	JPanel panAjouter = new JPanel();
+	JPanel panRemove = new JPanel();
+	
+	
+	static MyAgency monAgence = new MyAgency();
 	public First_Interface(){
 		super("Agence De Location De Voiture ");
+		
 		setSize(700,500);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new BorderLayout());
@@ -41,7 +50,12 @@ public class First_Interface extends JFrame {
 		
 		panel.setBackground(Color.GRAY);
 		
-		
+		ImageIcon icon = new ImageIcon("affiche.jpg");
+		//Image scaleImage = icon.getImage().getScaledInstance(28, 28,Image.SCALE_DEFAULT);
+		JLabel labimage = new JLabel(icon);
+		labimage.setSize(200,200);
+		add( labimage, BorderLayout.CENTER);
+		//pack();
 		
 		B.addActionListener(new ActionListener() {
 			
@@ -65,15 +79,26 @@ public class First_Interface extends JFrame {
 				 * } catch (Exception e1) { // TODO Auto-generated catch block
 				 * e1.printStackTrace(); }
 				 */
-				Agence A;	
+				/*Agence A;	
 				try {
 					ObjectInputStream ois=new ObjectInputStream(new FileInputStream("agence.txt"));
 						A=(Agence)ois.readObject();
 						ois.close();
 						 Affichage_voiture AV =  new Affichage_voiture(A);
+						 panAffichage = AV.getPanelAffichage();
+						 add(panAffichage, BorderLayout.CENTER);
+						 setVisible(true);
 					}catch(Exception e1) {
 						
-					}
+					}*/
+				
+				
+				 Affichage_voiture AV =  new Affichage_voiture((Agence)monAgence.deserialisation("agence1.txt"));
+				  monAgence.setAgence((Agence)monAgence.deserialisation("agence1.txt"));
+				 panAffichage = AV.getPanelAffichage();
+				 add(panAffichage, BorderLayout.CENTER);
+				 setVisible(true);
+		       // Client c1Client= new Client("Fadwa", "El ALAOUI", "BB183232", "CEL");
 			
 			
 			}
@@ -83,17 +108,47 @@ public class First_Interface extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				//removeAll();
+				//panRemove.setLayout(new BorderLayout());
+				remove(panAffichage);
+				remove(panAjouter);
 				  JButton inputButton = new JButton("Send");
 				    JTextArea editTextArea = new JTextArea("Type Here!");
-				    panel.add(inputButton);
-					panel.add(editTextArea);
+				    pancentre.add(inputButton);
+					pancentre.add(editTextArea);
+					add(pancentre, BorderLayout.CENTER);
 					setVisible(true);
 				    
 			}
 		});
 		
+		B5.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				///removeAll();
+				remove(panAffichage);
+				remove(labimage);
+				Add_voiture Ajouter = new Add_voiture();
+				panAjouter=Ajouter.getPanel();
+				add(panAjouter, BorderLayout.CENTER);
+				setVisible(true);
+			}
+		});
+		
+          /*  B4.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				Rendre_Voiture r=new Rendre_Voiture(A);
+			}
+		});*/
+		
 		setVisible(true);
 	}
+	
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

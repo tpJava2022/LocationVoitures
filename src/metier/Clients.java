@@ -32,4 +32,8 @@ public class Clients {
 		return false;
 		
 	}
+	public List<Client> lesClients()
+	{
+		return clients;
+	}
 }

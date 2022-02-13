@@ -12,5 +12,8 @@ public class CriterePrix implements Critere {
 		// TODO Auto-generated method stub
 		return prix>=v.getPrixLocation();
 	}
+	public int getPrix() {
+		return prix;
+	}
 	
 }
