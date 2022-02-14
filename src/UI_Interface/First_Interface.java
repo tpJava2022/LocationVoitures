@@ -28,6 +28,8 @@ public class First_Interface extends JFrame {
 	
 	
 	static MyAgency monAgence = new MyAgency();
+	
+	
 	public First_Interface(){
 		super("Agence De Location De Voiture ");
 		
@@ -40,7 +42,7 @@ public class First_Interface extends JFrame {
 		JButton B2 = new JButton ("Chercher  par critères");
 		JButton B3 = new JButton("Louer Voiture");
 		JButton B4 = new JButton("Rendre Voiture");
-		JButton B5 = new JButton("Ajouter Voiture");
+		JButton B5 = new JButton("Afficher Clients");
 
 		panel.add(B);
 		panel.add(B2);
@@ -48,7 +50,7 @@ public class First_Interface extends JFrame {
 		panel.add(B4);
 		panel.add(B5);
 		
-		panel.setBackground(Color.GRAY);
+		panel.setBackground(Color.PINK.darker());
 		
 		ImageIcon icon = new ImageIcon("affiche.jpg");
 		//Image scaleImage = icon.getImage().getScaledInstance(28, 28,Image.SCALE_DEFAULT);
@@ -93,8 +95,8 @@ public class First_Interface extends JFrame {
 					}*/
 				
 				
-				 Affichage_voiture AV =  new Affichage_voiture((Agence)monAgence.deserialisation("agence1.txt"));
-				  monAgence.setAgence((Agence)monAgence.deserialisation("agence1.txt"));
+				 Affichage_voiture AV =  new Affichage_voiture((Agence)monAgence.deserialisation("agenceFinale.txt"));
+				  monAgence.setAgence((Agence)monAgence.deserialisation("agenceFinale.txt"));
 				 panAffichage = AV.getPanelAffichage();
 				 add(panAffichage, BorderLayout.CENTER);
 				 setVisible(true);
@@ -117,6 +119,7 @@ public class First_Interface extends JFrame {
 				    pancentre.add(inputButton);
 					pancentre.add(editTextArea);
 					add(pancentre, BorderLayout.CENTER);
+					
 					setVisible(true);
 				    
 			}
@@ -130,9 +133,12 @@ public class First_Interface extends JFrame {
 				///removeAll();
 				remove(panAffichage);
 				remove(labimage);
-				Add_voiture Ajouter = new Add_voiture();
-				panAjouter=Ajouter.getPanel();
+				//Add_voiture Ajouter = new Add_voiture();
+				AfficherClients AfficherCli = new AfficherClients((Clients)monAgence.deserialisation("Clients.txt"));
+				panAjouter=AfficherCli.getPanelAffichage();
+		//panAjouter.setBackground(Color.LIGHT_GRAY);
 				add(panAjouter, BorderLayout.CENTER);
+				//setBackground(Color.blue);
 				setVisible(true);
 			}
 		});

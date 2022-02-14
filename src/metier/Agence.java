@@ -62,6 +62,15 @@ public class Agence implements Serializable{
 	public boolean remove(Voiture v) {
 		return voitures.remove(v);
 	}
+	public boolean remove(int id)
+	{
+		for(Voiture v : voitures)
+		{
+			if (v.getId() == id)
+				return voitures.remove(v);
+		}
+		return false;
+	}
 	
 	public Iterator<Voiture> selectionne(Critere c){
 		Iterator<Voiture> iVoitures;

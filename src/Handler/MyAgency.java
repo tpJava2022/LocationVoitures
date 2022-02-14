@@ -6,11 +6,13 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import metier.Agence;
+import metier.Client;
+import metier.Clients;
 import metier.Voiture;
 
 public class MyAgency {
 	private Agence A= new Agence(); 
-	
+	 private Clients C1 = new Clients();
 	public MyAgency() {
 		
 		
@@ -37,6 +39,19 @@ public class MyAgency {
 		 A.add(V8);
 		 A.add(V9);
 		 
+	     //serialisation(A, "agenceFinale.txt");
+		 
+		Client	A1 = new Client("Cl1","Cl1","AA124545","Civil");
+		Client	A2 = new Client("Cl2","Cl2","AA124545","Civil"); 		 
+		Client	A3 = new Client("Cl3","Cl3","AA124545","Civil");
+		Client	A4 = new Client("Cl4","Cl1","AA124545","Civil"); 
+		 
+		 C1.add(A1);
+		 C1.add(A2);
+		 C1.add(A2);
+		 C1.add(A4);
+		 
+	  //this.serialisation(C1,"Clients.txt");
 		 
 		 
 	}
@@ -46,7 +61,8 @@ public class MyAgency {
 		try {
 			ObjectOutputStream oos=new ObjectOutputStream(new FileOutputStream(f));
 		try {
-			oos.writeObject(A); oos.flush();
+			oos.writeObject(A); 
+			oos.flush();
 				 
 		}catch (Exception e1) { // TODO Auto-generated catch block
 				 e1.printStackTrace(); }
@@ -68,6 +84,7 @@ public class MyAgency {
 			}catch(Exception e1) {
 				
 			}
+		
 		return o;
 		
 	}
@@ -78,7 +95,20 @@ public class MyAgency {
 
 	public void setA(Voiture V) {
 		A.add(V); 
-		serialisation(A, "agence1.txt");
+		serialisation(A, "agenceFinale.txt");
+	}
+	public void supprimer(int id)
+	{
+		//A.remove(V);
+		A.remove(id);
+		serialisation(A, "agenceFinale.txt");
+	}
+	public void supprimerCli(String i)
+	{
+		//A.remove(V);
+		C1.delete(i);
+			
+		serialisation(C1, "Clients.txt");
 	}
 
 	public void setAgence(Agence a)

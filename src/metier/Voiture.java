@@ -7,7 +7,16 @@ public class Voiture implements Serializable {
 	private String model;
 	private int anneeProduction;
 	private int prixLocation;
+	private static int numbers=0;
+	private int id=++numbers;
 	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 	public Voiture(String marque, String model, int anneeProduction, int prixLocation) {
 		this.marque = marque;
 		this.model = model;

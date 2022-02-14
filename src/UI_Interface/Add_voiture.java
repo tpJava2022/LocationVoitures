@@ -1,5 +1,6 @@
 package UI_Interface;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -10,7 +11,7 @@ import metier.Voiture;
 public class Add_voiture extends JFrame {
 
 	JPanel panel = new JPanel();
-	public Add_voiture() {
+	public Add_voiture(int rowc) {
 		
 		setSize(500,500);
 		
@@ -57,18 +58,19 @@ public class Add_voiture extends JFrame {
 	   panel.setSize(250,250);
 	   panel.setLayout(null);
 	   
-		
+	    panel.setBackground(Color.pink);
 		save.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				if(text1.getText() != "" && text2.getText() != "" && text3.getText()!="" && text4.getText()!= "")
+			if((text1.getText() != "") && (text2.getText() != "") && (text3.getText()!="") && (text4.getText()!= ""))
 				{
 					Voiture V = new Voiture(text1.getText(),
 							                text2.getText(),
 							                Integer.parseInt(text3.getText()),
 							                Integer.parseInt(text4.getText()));
+					V.setId( rowc);
 					int res = JOptionPane.showConfirmDialog(panel,"Etes-vous sur?");
 					
 					if(res == JOptionPane.YES_OPTION)
@@ -81,12 +83,11 @@ public class Add_voiture extends JFrame {
 					
 				    }
 				  }
-					//First_Interface.monAgence.serialisation(save, getName())
-				
 				else {
 					JOptionPane.showMessageDialog(null,"Veulliez remplir tout les champs ");
 				}
 			}
+				
 		});
 		
 		

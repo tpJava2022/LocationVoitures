@@ -1,13 +1,18 @@
 package UI_Interface;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -34,7 +39,7 @@ public class AfficherClients extends JFrame{
 		{
 			Al.add(it.next());
 		}*/
-		String [][] data = new String[Al.size()][5];
+		String [][] data = new String[Al.size()][4];
 		int n=0;
 		for (Client v : Al)
 		{
@@ -48,7 +53,7 @@ public class AfficherClients extends JFrame{
 		n++;
 		}
 		
-		String[] columnNames = { "CIN", "Nom", "Prenom", "Civilite","Action"};
+		String[] columnNames = { "CIN", "Nom", "Prenom", "Civilite"};
 		
 		/*model = new DefaultTableModel(data, columnNames) {
 	         public Class getColumnClass(int column) {
@@ -81,7 +86,8 @@ public class AfficherClients extends JFrame{
 	}
 	public void table(String [][] data,String[] columnNames ) {
 		
-		JTable table = new JTable(data,columnNames);
+		model = new DefaultTableModel(data, columnNames);
+		JTable table = new JTable(model);
 		final TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(table.getModel());
 	      table.setRowSorter(sorter);
 		add (table, BorderLayout.CENTER);
@@ -145,6 +151,49 @@ public class AfficherClients extends JFrame{
 				
 			}
 		});
+	      
+	      
+JPanel panbutton = new JPanel(new FlowLayout());
+	      
+	      JButton button = new JButton("Ajouter un Client +");
+	    
+	      button.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					//Add_voiture Ajouter = new Add_voiture();
+				}
+			});
+	      JButton button1 = new JButton("Supprimer");
+	      
+	      button1.addActionListener(new ActionListener() {
+	          @Override
+	          public void actionPerformed(ActionEvent ae) {
+	             // check for selected row first
+	             if(table.getSelectedRow() != -1) {
+	                // remove selected row from the model
+	            	
+	            	//int id =  Integer.parseInt((String) table.getValueAt(table.getSelectedRow(), 0));
+	            	 System.out.println(table.getValueAt(table.getSelectedRow(), 0));
+	            	 
+	            	 First_Interface.monAgence.supprimerCli((String)table.getValueAt(table.getSelectedRow(), 0));
+	            	
+	                JOptionPane.showMessageDialog(null, "Selected row deleted successfully");
+	            
+	             }
+	             else
+	            	 JOptionPane.showMessageDialog(null, "You should select a Row");
+	          }
+	       });
+	      panbutton.setBackground(Color.pink.darker());
+	      
+	     panbutton.add(button);
+	     panbutton.add(button1);
+	     panelAffichage.add(panbutton,BorderLayout.SOUTH);
+	      
+	      
+	      
+	      
 	      //setVisible(true);
 		
 	}

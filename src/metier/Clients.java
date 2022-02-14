@@ -1,7 +1,8 @@
 package metier;
 
+import java.io.Serializable;
 import java.util.*;
-public class Clients {
+public class Clients implements Serializable {
 	private List<Client> clients;
 
 	public Clients(List<Client> clients) {
