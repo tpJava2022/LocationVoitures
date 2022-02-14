@@ -14,14 +14,14 @@ public class MyAgency {
 	public MyAgency() {
 		
 		
-		
+		/*
 		Voiture V1 = new Voiture("Mercedece", "benz", 500,2020); 
 		Voiture V2 = new Voiture("Alfa Romeo", " Giulietta", 500,2020); 
 		Voiture V3 = new Voiture("Citroën"," C4 Aircross", 50000, 2021);
-		Voiture V4 = new Voiture(" BMW"," Série 3", 750000, 2021);
+		Voiture V4 = new Voiture("BMW"," Série 3", 750000, 2021);
 		Voiture V5 = new Voiture("Opel"," Antara", 80000, 2021);
 		Voiture V6 = new Voiture("Audi"," A1 Sportback", 50000, 2021);
-		Voiture V7 = new Voiture(" Audi"," A5 Coupé", 10000, 2021);
+		Voiture V7 = new Voiture("Audi"," A5 Coupé", 10000, 2021);
 		Voiture V8 = new Voiture("Dacia"," Sandero", 50000, 2021);
 		Voiture V9 = new Voiture("Dacia"," Duster", 50000, 2021);
 		
@@ -35,7 +35,7 @@ public class MyAgency {
 		 A.add(V6);
 		 A.add(V7);
 		 A.add(V8);
-		 A.add(V9);
+		 A.add(V9);*/
 		 
 		 
 		 
@@ -71,6 +71,12 @@ public class MyAgency {
 		return o;
 		
 	}
+	
+	public Agence deserialiserAgencr(String f) {
+		Agence a=(Agence)deserialisation(f);
+		Voiture.setNumbers(a.Voiture_agence().size());
+		return a;
+	}
 
 	public Agence getA() {
 		return A;
@@ -84,6 +90,22 @@ public class MyAgency {
 	public void setAgence(Agence a)
 	{
 		A = a;
+		Voiture.setNumbers(a.Voiture_agence().size());
+	}
+	
+	public static void main(String[] args) {
+		MyAgency MA=new MyAgency();
+		Voiture V1 = new Voiture("Mercedece", "benz", 500,2020); 
+		Voiture V2 = new Voiture("Alfa Romeo", " Giulietta", 500,2020); 
+		Voiture V3 = new Voiture("Citroën"," C4 Aircross", 50000, 2021);
+		Voiture V4 = new Voiture("BMW"," Série 3", 750000, 2021);
+		Agence a=new Agence();
+		a.add(V1);
+		a.add(V2);
+		a.add(V3);
+		a.add(V4);
+		MA.setAgence(a);
+		MA.deserialiserAgencr("agence.txt");
 	}
 	
 }
