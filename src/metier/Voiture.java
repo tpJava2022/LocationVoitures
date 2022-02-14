@@ -3,6 +3,24 @@ package metier;
 import java.io.Serializable;
 
 public class Voiture implements Serializable {
+	private static int numbers=0;
+	private int id=++numbers;
+	public static int getNumbers() {
+		return numbers;
+	}
+
+	public static void setNumbers(int numbers) {
+		Voiture.numbers = numbers;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	private String marque;
 	private String model;
 	private int anneeProduction;
