@@ -39,13 +39,11 @@ public class First_Interface extends JFrame {
 		
 		add(panel, BorderLayout.SOUTH);
 		JButton B = new JButton("Afficher voitures");
-		JButton B2 = new JButton ("Chercher  par critères");
 		JButton B3 = new JButton("Louer Voiture");
 		JButton B4 = new JButton("Rendre Voiture");
 		JButton B5 = new JButton("Afficher Clients");
 
 		panel.add(B);
-		panel.add(B2);
 		panel.add(B3);
 		panel.add(B4);
 		panel.add(B5);
@@ -103,25 +101,6 @@ public class First_Interface extends JFrame {
 		       // Client c1Client= new Client("Fadwa", "El ALAOUI", "BB183232", "CEL");
 			
 			
-			}
-		});
-		B2.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				//removeAll();
-				//panRemove.setLayout(new BorderLayout());
-				remove(panAffichage);
-				remove(panAjouter);
-				  JButton inputButton = new JButton("Send");
-				    JTextArea editTextArea = new JTextArea("Type Here!");
-				    pancentre.add(inputButton);
-					pancentre.add(editTextArea);
-					add(pancentre, BorderLayout.CENTER);
-					
-					setVisible(true);
-				    
 			}
 		});
 		
