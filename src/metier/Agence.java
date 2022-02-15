@@ -9,6 +9,16 @@ import java.util.Set;
 
 public class Agence implements Serializable{
 	
+	
+	public int MaxId() {
+		int max=0;
+		for(Voiture v:voitures) {
+			if(v.getId()>max)
+				max=v.getId();
+		}
+		return max;
+	}
+
 	private ArrayList<Voiture> voitures;
 	private Map<Client, Voiture> locations=new HashMap<Client,Voiture>();
 

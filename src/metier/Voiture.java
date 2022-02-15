@@ -1,17 +1,10 @@
 package metier;
 
 import java.io.Serializable;
+import java.util.Collections;
 
 public class Voiture implements Serializable {
-	private static int numbers=0;
-	private int id=++numbers;
-	public static int getNumbers() {
-		return numbers;
-	}
-
-	public static void setNumbers(int numbers) {
-		Voiture.numbers = numbers;
-	}
+	private int id;
 
 	private String marque;
 	private String model;

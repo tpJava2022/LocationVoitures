@@ -3,9 +3,12 @@ package UI_Interface;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Collection;
+import java.util.Collections;
 
 import javax.swing.*;
 
+import metier.Agence;
 import metier.Voiture;
 
 public class Add_voiture extends JFrame {
@@ -29,12 +32,12 @@ public class Add_voiture extends JFrame {
 	    JTextField text2 = new JTextField();
 	    text2.setBounds(120,80,200,28);
 	    
-	    JLabel lab3 = new JLabel("Prix:");
+	    JLabel lab3 = new JLabel("Annee de prod:");
 		 lab3.setBounds(20,120,200,28);
 	    JTextField text3 = new JTextField();
 	    text3.setBounds(120,120,200,28);
 	    
-	    JLabel lab4 = new JLabel("Annee de Prod:");
+	    JLabel lab4 = new JLabel("Prix:");
 		 lab4.setBounds(20,160,200,28);
 	    JTextField text4 = new JTextField();
 	    text4.setBounds(120,160,200,28);
@@ -70,12 +73,14 @@ public class Add_voiture extends JFrame {
 							                text2.getText(),
 							                Integer.parseInt(text3.getText()),
 							                Integer.parseInt(text4.getText()));
-					V.setId( rowc);
+					Agence A=(Agence)First_Interface.monAgence.deserialiserAgencr("agence.txt");
+					//V.setId(Collections.max( A.Voiture_agence())+1);
+					V.setId( A.MaxId()+1);
+					First_Interface.monAgence.setA(V);
 					int res = JOptionPane.showConfirmDialog(panel,"Etes-vous sur?");
 					
 					if(res == JOptionPane.YES_OPTION)
 				    {
-						First_Interface.monAgence.setA(V);
 						text1.setText("");
 						text2.setText("");
 						text3.setText("");

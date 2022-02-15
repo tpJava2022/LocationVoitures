@@ -159,25 +159,30 @@ public class Louer_voiture extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String cing=cin.getText();
 				int idr=table.getSelectedRow();
-				String id=table.getModel().getValueAt(idr, 0).toString();
-				Client cl;
-				if(cing.length()>0) {
-					String prenomg=prenom.getText();
-					String nomg=nom.getText();
-					String civg=civ.getSelectedItem().toString();
-					cl=new Client(nomg, prenomg, cing, civg);
-					clts.add(cl);
-					ma.serialisation(clts, "Clients.txt");
-					System.out.println(id);
-				}else {
-					cing=cin1.getText();
-					cl=clts.getClient(cing);
-				}
 				
-				A.louerVoiture(cl, A.getVoiture(Integer.parseInt(id)));
-				ma.serialisation(A, "agence.txt");
+				if(table.getSelectedRow() != -1)  {
+					String id=table.getModel().getValueAt(idr, 0).toString();
+					String cing=cin.getText();
+					Client cl;
+					if(cing.length()>0) {
+						String prenomg=prenom.getText();
+						String nomg=nom.getText();
+						String civg=civ.getSelectedItem().toString();
+						cl=new Client(nomg, prenomg, cing, civg);
+						clts.add(cl);
+						ma.serialisation(clts, "Clients.txt");
+						System.out.println(id);
+					}else {
+						cing=cin1.getText();
+						cl=clts.getClient(cing);
+					}
+					
+					A.louerVoiture(cl, A.getVoiture(Integer.parseInt(id)));
+					ma.serialisation(A, "agence.txt");
+				}
+				else
+					 JOptionPane.showMessageDialog(null, "You should select a Row");
 			}
 		});
 		setVisible(true);

@@ -20,7 +20,7 @@ import metier.*;
 
 
 public class Affichage_voiture extends JFrame {
-	JPanel panelAffichage = new JPanel(); 
+	JPanel panelAffichage = new JPanel();
 	 
 	private DefaultTableModel model;
 	public Affichage_voiture(Agence A) {
@@ -47,7 +47,7 @@ public class Affichage_voiture extends JFrame {
 		  n++;
 		}
 		
-		String[] columnNames = {"Id", "Marque", "Model", "Anne Production", "Prix", "Etat"};
+		String[] columnNames = {"Id", "Marque", "Model", "Prix", "Anne Production", "Etat"};
 	
 		this.label();
 		this.table(data, columnNames);
@@ -129,7 +129,11 @@ public class Affichage_voiture extends JFrame {
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					Add_voiture Ajouter = new Add_voiture(table.getRowCount());
+					int rowCoumt = table.getRowCount()-1;
+					int value = Integer.parseInt((String) table.getValueAt(rowCoumt, 0))+1;
+					Add_voiture Ajouter = new Add_voiture(value);
+					
+					System.out.println(value+1);
 				}
 			});
 	      JButton button1 = new JButton("Supprimer les voiture");

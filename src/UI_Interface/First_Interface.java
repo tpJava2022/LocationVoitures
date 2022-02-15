@@ -93,7 +93,7 @@ public class First_Interface extends JFrame {
 					}*/
 				
 				
-				 Affichage_voiture AV =  new Affichage_voiture((Agence)monAgence.deserialisation("agence.txt"));
+				 Affichage_voiture AV =  new Affichage_voiture(monAgence.deserialiserAgencr("agence.txt"));
 				  monAgence.setAgence((Agence)monAgence.deserialisation("agence.txt"));
 				 panAffichage = AV.getPanelAffichage();
 				 add(panAffichage, BorderLayout.CENTER);
