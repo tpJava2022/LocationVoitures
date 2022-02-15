@@ -37,4 +37,11 @@ public class Clients implements Serializable {
 	{
 		return clients;
 	}
+	
+	public Client getClient(String cin) {
+		for(Client c:clients)
+			if(c.getCin().equals(cin))
+				return c;
+		return null;
+	}
 }

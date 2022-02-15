@@ -103,6 +103,13 @@ public class Agence implements Serializable{
 		return null;
 	}
 	
+	public Voiture getVoiture(int id) {
+		for(Voiture v: voitures)
+			if(v.getId()==id)
+				return v;
+		return null;
+	}
+	
 	public Iterator<Voiture> voituresLouees(){
 		Iterator<Voiture> it;
 		

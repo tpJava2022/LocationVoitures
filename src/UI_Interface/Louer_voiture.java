@@ -1,21 +1,15 @@
 package UI_Interface;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import java.awt.event.*;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
 import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
 
 import Handler.MyAgency;
 import metier.*;
@@ -24,10 +18,13 @@ public class Louer_voiture extends JFrame{
 	private JPanel p=new JPanel();
 	private JPanel p2=new JPanel();
 	private JPanel p3=new JPanel();
+	MyAgency ma=new MyAgency();
 	JTable table;
+	Clients clts;
 	private  DefaultTableModel model;
 	public Louer_voiture(Agence A) {
 		setTitle("Louer voiture");
+		clts=(Clients)ma.deserialisation("Clients.txt");
 		setSize(500,500);
 		setLayout(new BorderLayout());
 		JComboBox<String> cb1=new JComboBox<String>();
@@ -44,9 +41,10 @@ public class Louer_voiture extends JFrame{
 		}
 		for(int i=100;i<=1000;i+=100)
 		cb2.addItem(String.valueOf(i));
-		Label l1=new Label("critere marque :");l1.setFont(new Font("Arial",Font.BOLD,12));
-		Label l2=new Label("critere prix :");l2.setFont(new Font("Arial",Font.BOLD,12));
-		p.add(l1);p.add(cb1);p.add(l2);p.add(cb2);
+		JLabel l1=new JLabel("critere marque :");l1.setFont(new Font("Arial",Font.BOLD,12));
+		JLabel l2=new JLabel("critere prix :");l2.setFont(new Font("Arial",Font.BOLD,12));
+		JButton b1=new JButton("chercher");
+		p.add(l1);p.add(cb1);p.add(l2);p.add(cb2);p.add(b1);
 		add(p,BorderLayout.NORTH);
 		
 		JTable jt=new JTable();
@@ -77,9 +75,11 @@ public class Louer_voiture extends JFrame{
 		table = new JTable(model);
 		table(model);
 		p2.setLayout(new BoxLayout(p2, BoxLayout.Y_AXIS));
+		//p3.setLayout(new BorderLayout());
+		p3.setSize(200,200);
 		p2.add(p3);
 		add(p2,BorderLayout.CENTER);
-		cb1.addActionListener(new ActionListener() {
+		b1.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -96,12 +96,13 @@ public class Louer_voiture extends JFrame{
 				int n=0;
 				while(model.getRowCount()>0) model.removeRow(0);
 				while(it.hasNext()) {
-					data[n][0]=String.valueOf(it.next().getId());
-					data[n][1]= it.next().getMarque();
-					data[n][2]= it.next().getModel();
-					data[n][3]=String.valueOf( it.next().getPrixLocation());
-					data[n][4] = String.valueOf(it.next().getAnneeProduction());
-					   if(A.estLoue(it.next())) {
+					Voiture v=it.next();
+					data[n][0]=String.valueOf(v.getId());
+					data[n][1]= v.getMarque();
+					data[n][2]= v.getModel();
+					data[n][3]=String.valueOf( v.getPrixLocation());
+					data[n][4] = String.valueOf(v.getAnneeProduction());
+					   if(A.estLoue(v)) {
 					         data[n][5] = "Louée";
 					      }
 					   else data[n][5]= "Disponible";
@@ -111,26 +112,87 @@ public class Louer_voiture extends JFrame{
 				table.setModel(model);
 			}
 		});
+		JPanel p4=new JPanel();
+		p4.setLayout(new FlowLayout());
+		JButton b2=new JButton("ajouter client"),b3=new JButton("client existant");
+		p4.add(b2);p4.add(b3);
+		p2.add(p4);
+		JPanel p5=new JPanel();
+		p5.setLayout(new GridLayout(4,2));
+		JLabel l3=new JLabel("cin");p5.add(l3);
+		JTextField cin=new JTextField();p5.add(cin);
+		JLabel l4=new JLabel("nom");p5.add(l4);
+		JTextField nom=new JTextField();p5.add(nom);
+		JLabel l5=new JLabel("prenom");p5.add(l5);
+		JTextField prenom=new JTextField();p5.add(prenom);
+		JLabel l7=new JLabel("civilite");p5.add(l7);
+		JComboBox<String> civ=new JComboBox<String>();p5.add(civ);
+		civ.addItem("mr");civ.addItem("mle/mme");
+		p2.add(p5);
+		JPanel p6=new JPanel();
+		p6.setLayout(new GridLayout(1,2));
+		JLabel l6=new JLabel("cin");p6.add(l6);
+		JTextField cin1=new JTextField();p6.add(cin1);
+		JButton b4=new JButton("louer");
+		p6.setVisible(false);
+		p2.add(p6);
+		p2.add(b4);
+		b2.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				p5.setVisible(true);
+				p6.setVisible(false);
+			}
+		});
+		b3.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				p6.setVisible(true);
+				p5.setVisible(false);
+			}
+		});
+		b4.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String cing=cin.getText();
+				int idr=table.getSelectedRow();
+				String id=table.getModel().getValueAt(idr, 0).toString();
+				Client cl;
+				if(cing.length()>0) {
+					String prenomg=prenom.getText();
+					String nomg=nom.getText();
+					String civg=civ.getSelectedItem().toString();
+					cl=new Client(nomg, prenomg, cing, civg);
+					clts.add(cl);
+					ma.serialisation(clts, "Clients.txt");
+					System.out.println(id);
+				}else {
+					cing=cin1.getText();
+					cl=clts.getClient(cing);
+				}
+				
+				A.louerVoiture(cl, A.getVoiture(Integer.parseInt(id)));
+				ma.serialisation(A, "agence.txt");
+			}
+		});
 		setVisible(true);
 		
 	}
 	
 	public void table(DefaultTableModel model) {
-		final TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(table.getModel());
-	      table.setRowSorter(sorter);
-		add (table, BorderLayout.CENTER);
+		//final TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(table.getModel());
+	     // table.setRowSorter(sorter);
+		//p3.add (table);
 		JScrollPane scroll = new JScrollPane(table);
         table.setFillsViewportHeight(true);
-		p3.add(scroll,BorderLayout.CENTER);
+		p3.add(scroll);
 		
 		/***Filter***/
-		JPanel panel = new JPanel(new BorderLayout());
-	      JLabel label = new JLabel("Filter");
-	      panel.add(label, BorderLayout.WEST);
-	      final JTextField filterText = new JTextField("");
-	      panel.add(filterText, BorderLayout.CENTER);
-	      
-	      p3.add(panel, BorderLayout.NORTH);
 	      
 	     /* JButton button = new JButton("Filter");
 	      button.addActionListener(new ActionListener() {
@@ -149,9 +211,5 @@ public class Louer_voiture extends JFrame{
 	      });
 	      panelAffichage.add(button,BorderLayout.SOUTH);*/
 	}
-	
-	public static void main(String[] args){
-		MyAgency ma=new MyAgency();
-		Louer_voiture l=new Louer_voiture((Agence)ma.deserialiserAgencr("agence.txt"));
-	}
+
 }

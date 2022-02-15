@@ -13,20 +13,10 @@ public class Voiture implements Serializable {
 		Voiture.numbers = numbers;
 	}
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	private String marque;
 	private String model;
 	private int anneeProduction;
 	private int prixLocation;
-	private static int numbers=0;
-	private int id=++numbers;
 	
 	public int getId() {
 		return id;

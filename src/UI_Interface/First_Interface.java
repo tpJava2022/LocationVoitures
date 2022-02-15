@@ -95,8 +95,8 @@ public class First_Interface extends JFrame {
 					}*/
 				
 				
-				 Affichage_voiture AV =  new Affichage_voiture((Agence)monAgence.deserialisation("agenceFinale.txt"));
-				  monAgence.setAgence((Agence)monAgence.deserialisation("agenceFinale.txt"));
+				 Affichage_voiture AV =  new Affichage_voiture((Agence)monAgence.deserialisation("agence.txt"));
+				  monAgence.setAgence((Agence)monAgence.deserialisation("agence.txt"));
 				 panAffichage = AV.getPanelAffichage();
 				 add(panAffichage, BorderLayout.CENTER);
 				 setVisible(true);
@@ -148,9 +148,17 @@ public class First_Interface extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				Rendre_Voiture r=new Rendre_Voiture((Agence)monAgence.deserialisation("agence1.txt"));
+				Rendre_Voiture r=new Rendre_Voiture((Agence)monAgence.deserialisation("agence.txt"));
 			}
 		});
+            B3.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					Louer_voiture lv=new Louer_voiture((Agence)monAgence.deserialiserAgencr("agence.txt"));
+				}
+			});
 		
 		setVisible(true);
 	}

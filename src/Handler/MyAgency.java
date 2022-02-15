@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Iterator;
 
 import metier.Agence;
 import metier.Client;
@@ -125,17 +126,22 @@ public class MyAgency {
 	
 	public static void main(String[] args) {
 		MyAgency MA=new MyAgency();
-		Voiture V1 = new Voiture("Mercedece", "benz", 500,2020); 
-		Voiture V2 = new Voiture("Alfa Romeo", " Giulietta", 500,2020); 
-		Voiture V3 = new Voiture("Citroën"," C4 Aircross", 50000, 2021);
-		Voiture V4 = new Voiture("BMW"," Série 3", 750000, 2021);
+		Voiture V1 = new Voiture("Mercedece", "benz",2020, 500); 
+		Voiture V2 = new Voiture("Alfa Romeo", " Giulietta",2020, 500); 
+		Voiture V3 = new Voiture("Citroën"," C4 Aircross", 2021, 500);
+		Voiture V4 = new Voiture("BMW"," Série 3", 2021, 750);
 		Agence a=new Agence();
 		a.add(V1);
 		a.add(V2);
 		a.add(V3);
 		a.add(V4);
-		MA.setAgence(a);
+		
 		MA.deserialiserAgencr("agence.txt");
+		
+		a=MA.deserialiserAgencr("agence.txt");
+		MA.setAgence(a);
+		Iterator<Voiture> it=a.voituresLouees();
+		while(it.hasNext())	System.out.println(it.next());
 	}
 	
 }
